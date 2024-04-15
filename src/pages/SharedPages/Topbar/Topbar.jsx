@@ -16,7 +16,7 @@ const Topbar = () => {
 
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1]  w-60">
 
-                        <div className=" border-gray-200 h-screen p-4 bg-[#f3f1e4] ">
+                        <div className=" border-gray-200 h-screen p-4 bg-colorBase ">
                             <UserMenu></UserMenu>
                             <ul className="menu menu-vertical mx-[-16px] pt-10 ">
                                 <MainMenu></MainMenu>

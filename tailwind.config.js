@@ -7,8 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        "baseColor":"#f3f1e4",
-        "btnHoverBase": "#f6f1d1"
+        "colorBase":"#f3f1e4",
+        "colorBtnHoverBase": "#f6f1d1",
+        "colorHighLight":"#ffd000"
+
+        
       },
     },
   },

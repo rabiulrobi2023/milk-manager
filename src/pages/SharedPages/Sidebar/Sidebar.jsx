@@ -10,7 +10,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className="h-[calc(100vh-200px)] md:h-screen p-4 bg-[#f3f1e4] hidden md:flex md:flex-col ">
+            <div className="h-[calc(100vh-200px)] md:h-screen p-4 bg-colorBase hidden md:flex md:flex-col ">
                 <UserMenu></UserMenu>
                 <ul className="menu menu-vertical mx-[-16px] pt-10 ">
                    <MainMenu></MainMenu>
