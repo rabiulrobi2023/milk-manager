@@ -30,9 +30,9 @@ const Login = () => {
     return (
         <div className="mx-auto flex justify-center items-center h-screen text-gray-700  ">
             <form  onSubmit={handleSubmit(onSubmit) } className="bg-[#0707070c]">
-                <div className="flex flex-col gap-3 w-[280px] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-[url(https://i.ibb.co/sJ74JtY/milk-icon2.png)] bg-no-repeat bg-center bg-blend-lighten  ">
+                <div className="flex flex-col gap-3 w-[calc(100vw-60px)] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-[url(https://i.ibb.co/sJ74JtY/milk-icon2.png)] bg-no-repeat bg-center bg-blend-lighten  ">
 
-                    <p className="text-center font-bold text-xl"><span className="text-colorHighLight">Milk</span> Management</p>
+                    <p className="text-center font-bold text-2xl"><span className="text-colorHighLight">Milk</span> Management</p>
                     <p className="text-center font-bold text-2xl">Login</p>
 
                     <div className="flex flex-col">

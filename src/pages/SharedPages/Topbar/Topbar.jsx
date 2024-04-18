@@ -1,8 +1,9 @@
 import { GrHistory } from "react-icons/gr";
 import { CiMenuBurger } from "react-icons/ci";
 import UserMenu from "../../../component/UserMenu";
-import MainMenu from "../../../component/MainMenu";
+import BuyerMenu from "../../../component/BuyerMenu";
 import SubMenu from "../../../component/SubMenu";
+import AdminMenu from "../../../component/AdminMenu";
 
 const Topbar = () => {
 
@@ -18,8 +19,8 @@ const Topbar = () => {
 
                         <div className=" border-gray-200 h-screen p-4 bg-colorBase ">
                             <UserMenu></UserMenu>
-                            <ul className="menu menu-vertical mx-[-16px] pt-10 ">
-                                <MainMenu></MainMenu>
+                            <ul className="menu menu-vertical mx-[-16px] pt-10 mb-10 ">
+                                <BuyerMenu></BuyerMenu>
                                 <li className="px-0">
                                     <details>
                                         <summary><GrHistory></GrHistory>History</summary>
@@ -29,6 +30,7 @@ const Topbar = () => {
                                     </details>
                                 </li>
                             </ul>
+                            <AdminMenu></AdminMenu>
                         </div>
 
                     </ul>

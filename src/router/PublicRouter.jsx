@@ -8,6 +8,7 @@ import Pay from "../pages/Pay/Pay";
 import Login from "../pages/Login/Login";
 import StartingLayout from "../Layout/StartingLayout/StartingLayout";
 import SignUp from "../pages/SignUp/SignUp";
+import PendingUsers from "../pages/PendingUsers/PendingUsers";
 
 
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: "dashboard",
+        path: "home",
         element: <Home></Home>
       },
       {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "pay",
         element: <Pay></Pay>
+      },
+      {
+        path:"acc-request",
+        element: <PendingUsers></PendingUsers>
       }
     ]
 

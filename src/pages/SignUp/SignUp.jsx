@@ -1,20 +1,23 @@
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { GoEyeClosed } from "react-icons/go";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { authContext } from "../../Provider/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
+import Swal from "sweetalert2";
+
 
 const SignUp = () => {
-    const { createUser } = useContext(authContext)
+    const axiosGeneral = useAxiosGeneral()
+    const navigate= useNavigate()
+ 
+
     const {
         register,
         handleSubmit,
         reset,
-        watch,
-        control,
         formState: { errors },
     } = useForm()
 
@@ -28,10 +31,12 @@ const SignUp = () => {
     }
 
     const [samePass, setSamepass] = useState(true)
-    const onSubmit = (data) => {
-        const email = data.email;
-        const password = data.password;
-        const retypePassword = data.retypePassword;
+
+
+    const onSubmit = async (formData) => {
+        const email = formData.email;
+        const password = formData.password;
+        const retypePassword = formData.retypePassword;
 
         if (password != retypePassword) {
             setSamepass(false)
@@ -41,29 +46,88 @@ const SignUp = () => {
             setSamepass(true)
         }
 
-        console.log(email, password)
+        const userInfo = {
+            name: formData.name,
+            email: email,
+            password: password,
+            type: formData.accountType,
+            role:"userOnly",
+            status: "pending"
+        }
 
+        const url = `/users?email=${email}`
 
-        createUser(email, password).then((result) => {
-            console.log(result)
-        }).catch(error => {
-            console.log(error)
-        })
+        axiosGeneral.get(url)
+            .then(res => {
+                const registeredEmail = res.data.email;
+                if (registeredEmail) {
 
+                    Swal.fire({
+                        icon: "error",
+                        title: `The email address is already registered`,
+                        text: `Please try using another email address.`,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        width: "280px",
+                        background: "colorBase",
+                        customClass: {
+                            title: 'text-red-500 text-base',
+                            icon: 'text-blue-200 text-[7px]',
+                            popup: 'text-green-600 text-sm',
+                        }
+                    });
+                }
 
+                else {
+                    axiosGeneral.post('/users', userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Successfull",
+                                    text: "Please wait for managerial approval",
+                                    showConfirmButton: false,
+                                    width: "280px",
+                                    timer: 3000,
+                                    customClass: {
+                                        title: 'text-[20px] text-green-600',
+                                        icon: 'text-[12px]',
+                                        popup: 'text-gray-600 text-sm pt-0',
+                                    } 
+                                });
+                                reset()
+                                navigate ("/")
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: `Opps!`,
+                                    text: "Something Error",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    width: "280px",
+                                    background: "colorBase",
+                                    customClass: {
+                                        title: 'text-red-500 text-xl',
+                                        icon: 'text-blue-200 text-[7px]',
+                                        popup: 'text-green-600 text-sm',
+                                    }
+                                });
+                            }
+                        })
+                }
 
-        reset()
+            })
 
+       
     }
     return (
         <div className="mx-auto flex justify-center items-center h-screen text-gray-600">
             <form onSubmit={handleSubmit(onSubmit)} >
-                <div className="flex flex-col gap-3 w-[280px] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-no-repeat bg-center bg-blend-lighten  ">
+                <div className="flex flex-col gap-3 w-[calc(100vw-60px)]  md:w-[400px] md:mx-auto shadow-2xl shadow-stone-400 p-6 rounded-md bg-no-repeat bg-center bg-blend-lighten  ">
 
-                    <p className="text-center font-bold text-xl"><span className="text-colorHighLight">Milk</span> Management</p>
+                    <p className="text-center font-bold text-2xl"><span className="text-colorHighLight">Milk</span> Management</p>
                     <p className="text-center font-bold text-2xl">Sign Up</p>
-
-
 
 
                     <div className="flex flex-col">
