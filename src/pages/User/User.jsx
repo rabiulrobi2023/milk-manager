@@ -8,6 +8,7 @@ const User = ({ user, index, refetch }) => {
     const { _id, name, email, type, role } = user;
     const axiosGeneral = useAxiosGeneral()
     const {currentUserInDB,isLoading}=useCurrentUserFromDB()
+
     const navigate=useNavigate()
     // console.log(currentUserInDB.name)
     // console.log(currentUserInDB._id)
@@ -56,7 +57,9 @@ const User = ({ user, index, refetch }) => {
                                     popup: 'text-gray-600 text-sm pt-0',
                                 }
                             });
+                            refetch()
                             navigate("/")
+                            
 
                         })
                         
@@ -67,22 +70,6 @@ const User = ({ user, index, refetch }) => {
             });
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -138,8 +125,8 @@ const User = ({ user, index, refetch }) => {
             <td className="border-[1px] text-left">{email}</td>
             <td className="border-[1px] capitalize ">{type}</td>
             <td className="border-[1px] capitalize ">{role}</td>
-            <td className="border-[1px] text-green-600 cursor-pointer hover:text-green-500 hover:scale-125" onClick={handleMakeAdmin} >Make Admin</td>
-            <td className="border-[1px] text-red-600 cursor-pointer hover:text-red-500 hover:scale-125" onClick={handleDelete}>Delete</td>
+            <td className={`border-[1px] ${role=="admin" ? "text-gray-500 btn-disabled  ":""}  hover:no-underline text-green-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleMakeAdmin}>Make Admin</td>
+            <td className={`border-[1px] ${role=="admin" ? "text-gray-500 btn-disabled  ":""}  hover:no-underline text-red-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleDelete}>Delete</td>
         </tr>
     );
 };

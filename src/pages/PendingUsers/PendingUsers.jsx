@@ -27,7 +27,7 @@ const PendingUsers = () => {
         <div >
             {
                 !users?.length ?
-                    <div className="flex flex-col  m-auto  h-full mt-10">
+                    <div className="flex flex-col gap-2  m-auto  h-full pt-10">
                         <img src="https://i.ibb.co/SJzFQLm/empty.png" alt="" className="w-20 h-20 flex m-auto" />
                         <p className="text-center">There is no any new account request</p>
                     </div>

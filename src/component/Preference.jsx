@@ -28,7 +28,7 @@ const Preference = () => {
             <p className="font-bold ">Preference</p>
             <li><NavLink to="/error"><PiUsersFourLight className="text-[18px]" />Change Name</NavLink></li>
             <li><NavLink to="/error"><BiPurchaseTagAlt className="text-[18px]" />Change Password</NavLink></li>
-            <li><p onClick={handleLogout}><BiLogOutCircle className="text-[18px]"></BiLogOutCircle>Logout</p></li>
+            <li><p onClick={handleLogout}><BiLogOutCircle className="text-[18px] text-red-600"></BiLogOutCircle>Logout</p></li>
                  
         </div>
 
