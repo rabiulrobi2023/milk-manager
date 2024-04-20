@@ -51,7 +51,7 @@ const SignUp = () => {
             email: email,
             password: password,
             type: formData.accountType,
-            role:"userOnly",
+            role:"user",
             status: "pending"
         }
 

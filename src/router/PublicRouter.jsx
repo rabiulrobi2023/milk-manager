@@ -9,6 +9,7 @@ import Login from "../pages/Login/Login";
 import StartingLayout from "../Layout/StartingLayout/StartingLayout";
 import SignUp from "../pages/SignUp/SignUp";
 import PendingUsers from "../pages/PendingUsers/PendingUsers";
+import Users from "../pages/Users/Users";
 
 
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path:"acc-request",
         element: <PendingUsers></PendingUsers>
+      },
+      {
+        path:"users",
+        element:<Users></Users>
       }
     ]
 

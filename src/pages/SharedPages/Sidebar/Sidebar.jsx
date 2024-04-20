@@ -3,19 +3,17 @@ import UserMenu from "../../../component/UserMenu";
 import BuyerMenu from "../../../component/BuyerMenu";
 import SubMenu from "../../../component/SubMenu";
 import AdminMenu from "../../../component/AdminMenu";
-
-
-
+import Preference from "../../../component/Preference";
 
 const Sidebar = () => {
-
+  
     return (
-        <div>
-            <div className="h-[calc(100vh-200px)] md:h-screen p-4 bg-colorBase hidden md:flex md:flex-col ">
+     
+            <div className="h-[calc(100vh-200px)] md:h-screen p-4 bg-colorBase hidden md:flex md:flex-col w-[250px]">
                 <UserMenu></UserMenu>
-                <ul className="menu menu-vertical mx-[-16px] pt-10 ">
+                <ul className="menu menu-vertical mx-[-16px] pt-5">
                     <BuyerMenu></BuyerMenu>
-                    <li className="px-0 mb-20">
+                    <li className="px-0 mb-5">
                         <details>
                             <summary className="border-0"><GrHistory></GrHistory>History</summary>
                             <ul className="pl-4">
@@ -24,10 +22,10 @@ const Sidebar = () => {
                         </details>
                     </li>
                     <AdminMenu></AdminMenu>
+                    <Preference></Preference>
                 </ul>
             </div>
 
-        </div>
     );
 };
 

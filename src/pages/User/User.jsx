@@ -1,22 +1,29 @@
-import { useContext } from "react";
-import AuthProvider, { authContext } from "../../Provider/AuthProvider";
-import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
 import Swal from "sweetalert2";
-<link rel="stylesheet" href="sweetalert2.min.css"></link>
+import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
+import useCurrentUserFromDB from "../../hooks/CurrentUserFromDB/useCurrentUserFromDB";
+import { useNavigate } from "react-router-dom";
 
 
-const PendingUser = ({ user, index, refetch }) => {
-    const { name, email, type, password, _id } = user;
+const User = ({ user, index, refetch }) => {
+    const { _id, name, email, type, role } = user;
     const axiosGeneral = useAxiosGeneral()
-    const { createUser } = useContext(authContext)
+    const {currentUserInDB,isLoading}=useCurrentUserFromDB()
+    const navigate=useNavigate()
+    // console.log(currentUserInDB.name)
+    // console.log(currentUserInDB._id)
+    // console.log(_id)
 
 
-    const updateData = {
-        status: "approved"
+    const updateData1 = {
+        role: "admin"
     }
-    const handleApporve = () => {
+    const updateData2 = {
+        role: "user"
+
+    }
+    const handleMakeAdmin = () => {
         Swal.fire({
-            html: `Are you sure approve the user?`,
+            html: `If your make this account as admin you will lost your admin power. Are you aggree?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",
@@ -33,33 +40,52 @@ const PendingUser = ({ user, index, refetch }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    createUser(email, password)
-                        .then(res => {
-                            console.log(res)
-                            axiosGeneral.patch(`/users/${_id}`, updateData)
+                    axiosGeneral.patch(`/users/${_id}`, updateData1)
+                    .then(res => {
+                        axiosGeneral.patch(`/users/${currentUserInDB?._id}`, updateData2)
+                        .then(res=>{
+                            Swal.fire({
+                                icon: "success",
+                                title: "Successfull",
+                                showConfirmButton: false,
+                                width: "280px",
+                                timer: 3000,
+                                customClass: {
+                                    title: 'text-[20px] text-green-600',
+                                    icon: 'text-[12px]',
+                                    popup: 'text-gray-600 text-sm pt-0',
+                                }
+                            });
+                            navigate("/")
 
-                                .then(res => {
-                                    refetch()
-                                    Swal.fire({
-                                        icon: "success",
-                                        title: "Successfull",
-                                        showConfirmButton: false,
-                                        width: "280px",
-                                        timer: 3000,
-                                        customClass: {
-                                            title: 'text-[20px] text-green-600',
-                                            icon: 'text-[12px]',
-                                            popup: 'text-gray-600 text-sm pt-0',
-                                        }
-                                    });
-                                })
                         })
+                        
+                    })
 
 
                 }
             });
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const handleDelete = () => {
         Swal.fire({
@@ -105,17 +131,17 @@ const PendingUser = ({ user, index, refetch }) => {
 
 
     }
-
     return (
         <tr className="h-10 hover:bg-[#cecccc32] text-center max-w-fit  ">
             <td className="border-[1px] min-w-fit">{index + 1}</td>
             <td className="border-[1px] text-left whitespace-nowrap">{name}</td>
             <td className="border-[1px] text-left">{email}</td>
             <td className="border-[1px] capitalize ">{type}</td>
-            <td className="border-[1px] text-green-600 cursor-pointer hover:scale-125 hover:text-green-500" onClick={handleApporve}>Approve</td>
+            <td className="border-[1px] capitalize ">{role}</td>
+            <td className="border-[1px] text-green-600 cursor-pointer hover:text-green-500 hover:scale-125" onClick={handleMakeAdmin} >Make Admin</td>
             <td className="border-[1px] text-red-600 cursor-pointer hover:text-red-500 hover:scale-125" onClick={handleDelete}>Delete</td>
         </tr>
     );
 };
 
-export default PendingUser;
+export default User;

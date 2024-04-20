@@ -4,6 +4,7 @@ import UserMenu from "../../../component/UserMenu";
 import BuyerMenu from "../../../component/BuyerMenu";
 import SubMenu from "../../../component/SubMenu";
 import AdminMenu from "../../../component/AdminMenu";
+import Preference from "../../../component/Preference";
 
 const Topbar = () => {
 
@@ -19,7 +20,7 @@ const Topbar = () => {
 
                         <div className=" border-gray-200 h-screen p-4 bg-colorBase ">
                             <UserMenu></UserMenu>
-                            <ul className="menu menu-vertical mx-[-16px] pt-10 mb-10 ">
+                            <ul className="menu menu-vertical mx-[-16px] pt-5 mb-4 ">
                                 <BuyerMenu></BuyerMenu>
                                 <li className="px-0">
                                     <details>
@@ -31,6 +32,7 @@ const Topbar = () => {
                                 </li>
                             </ul>
                             <AdminMenu></AdminMenu>
+                            <Preference></Preference>
                         </div>
 
                     </ul>
