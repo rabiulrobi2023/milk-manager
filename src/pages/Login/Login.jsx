@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useContext, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { GoEyeClosed } from "react-icons/go";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +12,8 @@ import Swal from "sweetalert2";
 
 const Login = () => {
     const axiosGeneral = useAxiosGeneral()
-    const { loginWithIdPass } = useContext(authContext)
+    const { loginWithIdPass, user, createUser} = useContext(authContext)
+
     const {
         register,
         handleSubmit,
@@ -25,8 +26,8 @@ const Login = () => {
     const handleSeePassword = () => {
         setSeePass(!seePass)
     }
-    const [errorPass,setErrorPass]=useState("")
-    const navigate=useNavigate()
+    const [errorPass, setErrorPass] = useState("")
+    const navigate = useNavigate()
 
 
 
@@ -35,20 +36,116 @@ const Login = () => {
 
 
     const onSubmit = (data) => {
+      
         setErrorPass("")
         const email = data.email;
         const password = data.password;
-        console.log(email, password)
-       
+
         axiosGeneral(`/users?email=${email}`)
-        .then(res=>{
-            const findEmail = res.data.email;
-            const findStatus= res.data.status
-            if(findEmail){
-                if(findStatus=="pending"){
+            .then(res => {
+                const findEmail = res.data.email;
+                const findStatus = res.data.status;
+                const findPassFromDB = res.data.password;
+                const findAuthen= res.data.authen;
+                const id = res.data._id
+
+                console.log(findEmail,findStatus,findPassFromDB,findAuthen,id)
+                if (findEmail) {
+                    if (findPassFromDB != password) {
+                        setErrorPass("Wrong Password")
+                    }
+                    else if (findStatus == "pending") {
+                        Swal.fire({
+                            icon: "info",
+                            text: "The account is pending for admin approval",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            width: "280px",
+                            background: "colorBase",
+                            customClass: {
+                                title: 'text-red-500 text-xl',
+                                icon: 'text-blue-200 text-[7px]',
+                                popup: 'text-green-600 text-sm',
+                            }
+                        });
+                    }
+                    else if ((findStatus == "approved") && findAuthen=="no") {
+                        Swal.fire({
+                            title: "Congratulation!",
+                            html: `Your Account has been approved`,
+                            confirmButtonText: "Let's Start",
+                            confirmButtonColor: "#168a40",
+                            background: "white",
+                            padding: "10px",
+                            width: "280px",
+                            customClass: {
+                                confirmButton: "",
+                                popup: "text-[14px] text-green-600",
+                                title:"text-orange-600"
+                            }
+
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            
+                                createUser(email, password)
+                                    .then(result => {                                      
+                                        if (result.user) {
+                                            const updateData= {
+                                                authen:"yes"
+                                            }
+                                            axiosGeneral.patch(`/users/${id}`, updateData)
+                                            .then(res=>{
+                                                console.log(res)
+                                                Swal.fire({
+                                                    icon: "success",
+                                                    title: "Login Successfull",
+                                                    showConfirmButton: false,
+                                                    width: "280px",
+                                                    timer: 2000,
+                                                    customClass: {
+                                                        title: 'text-[20px] text-green-600',
+                                                        icon: 'text-[12px]',
+                                                        popup: 'text-green-600 text-sm pt-0',
+                                                    }
+                                                });
+
+                                            })
+                                           
+                                            navigate("/dashboard")
+                                        }
+                                    })
+                            }
+                        });
+
+                    }
+                   
+                    else {
+                        loginWithIdPass(email, password)
+                            .then(result => {
+                                const loggedUser = result.user;
+                                if (loggedUser) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Login Successfull",
+                                        showConfirmButton: false,
+                                        width: "280px",
+                                        timer: 2000,
+                                        customClass: {
+                                            title: 'text-[20px] text-green-600',
+                                            icon: 'text-[12px]',
+                                            popup: 'text-green-600 text-sm pt-0',
+                                        }
+                                    });
+                                    navigate("/dashboard")
+                                }
+                            })
+                    }
+                }
+
+                else {
                     Swal.fire({
-                        icon: "info",
-                        text: "The account is pending for admin approval",
+                        icon: "error",
+                        text: "The account is not registered",
                         showConfirmButton: false,
                         timer: 3000,
                         width: "280px",
@@ -56,64 +153,21 @@ const Login = () => {
                         customClass: {
                             title: 'text-red-500 text-xl',
                             icon: 'text-blue-200 text-[7px]',
-                            popup: 'text-green-600 text-sm',
+                            popup: 'text-red-600 text-sm',
                         }
                     });
+
                 }
-                else{
-                     loginWithIdPass(email,password)
-                     .then(result=>{
-                        const loggedUser= result.user;
-                        if(loggedUser){
-                            Swal.fire({
-                                icon: "success",
-                                title: "Login Successfull",
-                                showConfirmButton: false,
-                                width: "280px",
-                                timer: 2000,
-                                customClass: {
-                                    title: 'text-[20px] text-green-600',
-                                    icon: 'text-[12px]',
-                                    popup: 'text-green-600 text-sm pt-0',
-                                }
-                            });
-                            navigate("/dashboard")
-                           
-                        }
-                        
-                     })
-                     .catch(
-                        setErrorPass("Worng Password")
-                        
-                     )
-                }
-               
-
-            }
-            else{
-                Swal.fire({
-                    icon: "error",
-                    text: "The account is not registered",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    width: "280px",
-                    background: "colorBase",
-                    customClass: {
-                        title: 'text-red-500 text-xl',
-                        icon: 'text-blue-200 text-[7px]',
-                        popup: 'text-red-600 text-sm',
-                    }
-                });
-
-            }
-            
-        })
-
-
-      
+            })
     }
+    // if(loading){
+    //     return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
+    //  }
     return (
+        
+       
         <div className="mx-auto flex justify-center items-center h-screen text-gray-700  ">
+            
             <form onSubmit={handleSubmit(onSubmit)} className="bg-[#0707070c]">
                 <div className="flex flex-col gap-3 w-[calc(100vw-60px)] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-[url(https://i.ibb.co/sJ74JtY/milk-icon2.png)] bg-no-repeat bg-center bg-blend-lighten  ">
 
@@ -158,10 +212,14 @@ const Login = () => {
                         {errors.password?.type === "required" && (
                             <p role="alert" className="text-red-600 text-sm">Password is required</p>
                         )}
+
                         {
-                            errorPass?
-                            <p className="text-red-600 text-sm">{errorPass}</p>:""
+                            errors? "":<p className="text-red-600 text-sm">{errorPass}</p>
                         }
+                        {/* {
+                            errorPass ?
+                                <p className="text-red-600 text-sm">{errorPass}</p> : ""
+                        } */}
 
                     </div>
 

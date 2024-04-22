@@ -18,9 +18,6 @@ const UserMenu = () => {
         return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
     }
     
-    console.log(userNameInDB)
-
-
     const userHistory = <>
         <div className="flex justify-center items-center gap-2 flex-col">
             <p className="text-center text-6xl"><FaRegUserCircle></FaRegUserCircle></p>

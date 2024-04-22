@@ -4,6 +4,7 @@ import BuyerMenu from "../../../component/BuyerMenu";
 import SubMenu from "../../../component/SubMenu";
 import AdminMenu from "../../../component/AdminMenu";
 import Preference from "../../../component/Preference";
+import SellerMenu from "../../../component/SellerMenu"
 
 const Sidebar = () => {
   
@@ -13,6 +14,8 @@ const Sidebar = () => {
                 <UserMenu></UserMenu>
                 <ul className="menu menu-vertical mx-[-16px] pt-5">
                     <BuyerMenu></BuyerMenu>
+                    <SellerMenu></SellerMenu>
+                    
                     <li className="px-0 mb-5">
                         <details>
                             <summary className="border-0"><GrHistory></GrHistory>History</summary>

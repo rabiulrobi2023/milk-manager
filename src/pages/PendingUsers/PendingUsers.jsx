@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
 import PendingUser from "../PendingUser/PendingUser";
+import { useContext } from "react";
+import { pendingUserContext } from "../../Provider/PendingUserProvider";
 
 const PendingUsers = () => {
+    const {pendingUsers,setPendingUsers}=useContext(pendingUserContext)
     const axiosGeneral = useAxiosGeneral()
     const url = "/pending-users"
 
@@ -17,6 +20,8 @@ const PendingUsers = () => {
             return res.data
         }
     })
+    setPendingUsers(users)
+    
 
     if(isLoading){
        return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>

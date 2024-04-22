@@ -33,29 +33,22 @@ const PendingUser = ({ user, index, refetch }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    createUser(email, password)
+                    axiosGeneral.patch(`/users/${_id}`, updateData)
                         .then(res => {
-                            console.log(res)
-                            axiosGeneral.patch(`/users/${_id}`, updateData)
-
-                                .then(res => {
-                                    refetch()
-                                    Swal.fire({
-                                        icon: "success",
-                                        title: "Successfull",
-                                        showConfirmButton: false,
-                                        width: "280px",
-                                        timer: 3000,
-                                        customClass: {
-                                            title: 'text-[20px] text-green-600',
-                                            icon: 'text-[12px]',
-                                            popup: 'text-gray-600 text-sm pt-0',
-                                        }
-                                    });
-                                })
+                            refetch()
+                            Swal.fire({
+                                icon: "success",
+                                title: "Approved",
+                                showConfirmButton: false,
+                                width: "280px",
+                                timer: 3000,
+                                customClass: {
+                                    title: 'text-[20px] text-green-600',
+                                    icon: 'text-[12px]',
+                                    popup: 'text-gray-600 text-sm pt-0',
+                                }
+                            });
                         })
-
-
                 }
             });
 
@@ -66,8 +59,6 @@ const PendingUser = ({ user, index, refetch }) => {
             html: `Are you sure delete the account request?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
-
-
             cancelButtonColor: "#168a40",
             confirmButtonColor: "#eb4654",
             background: "white",
@@ -105,6 +96,7 @@ const PendingUser = ({ user, index, refetch }) => {
 
 
     }
+    
 
     return (
         <tr className="h-10 hover:bg-[#cecccc32] text-center max-w-fit  ">

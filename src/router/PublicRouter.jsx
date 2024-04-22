@@ -10,6 +10,8 @@ import StartingLayout from "../Layout/StartingLayout/StartingLayout";
 import SignUp from "../pages/SignUp/SignUp";
 import PendingUsers from "../pages/PendingUsers/PendingUsers";
 import Users from "../pages/Users/Users";
+import PrivetRoutes from "./PrivetRoutes";
+import AdminRoutes from "./AdminRoutes";
 
 
 
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
 
   {
     path: "dashboard",
-    element: <MainLayout></MainLayout>,
+    element: <PrivetRoutes><MainLayout></MainLayout></PrivetRoutes>,
     children: [
       {
         path: "home",
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path:"users",
-        element:<Users></Users>
+        element:<AdminRoutes><Users></Users></AdminRoutes>
       }
     ]
 

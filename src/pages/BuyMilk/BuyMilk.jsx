@@ -71,7 +71,7 @@ const BuyMilk = () => {
                             name="purAmount"
                             type="number"
                             min="0.5"
-                            step=".5"
+                            step=".25"
                             placeholder="Enter Amount in Litter"
                             className="border-[1px]  px-2 py-1 rounded-sm"
                             {...register("purAmount", {

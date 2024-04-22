@@ -24,7 +24,7 @@ const User = ({ user, index, refetch }) => {
     }
     const handleMakeAdmin = () => {
         Swal.fire({
-            html: `If your make this account as admin you will lost your admin power. Are you aggree?`,
+            html: `If you make this account as admin, you'll lose your admin power. Do you agree??`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",
@@ -125,8 +125,8 @@ const User = ({ user, index, refetch }) => {
             <td className="border-[1px] text-left">{email}</td>
             <td className="border-[1px] capitalize ">{type}</td>
             <td className="border-[1px] capitalize ">{role}</td>
-            <td className={`border-[1px] ${role=="admin" ? "text-gray-500 btn-disabled  ":""}  hover:no-underline text-green-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleMakeAdmin}>Make Admin</td>
-            <td className={`border-[1px] ${role=="admin" ? "text-gray-500 btn-disabled  ":""}  hover:no-underline text-red-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleDelete}>Delete</td>
+            <td className={`border-[1px] ${role=="admin" ? "text-gray-400 btn-disabled  ":""}  hover:no-underline text-green-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleMakeAdmin}>Make Admin</td>
+            <td className={`border-[1px] ${role=="admin" ? "text-gray-400 btn-disabled  ":""}  hover:no-underline text-red-600 cursor-pointer hover:text-green-500 hover:scale-125`} onClick={handleDelete}>Delete</td>
         </tr>
     );
 };

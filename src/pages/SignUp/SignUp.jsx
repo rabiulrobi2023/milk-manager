@@ -52,7 +52,8 @@ const SignUp = () => {
             password: password,
             type: formData.accountType,
             role:"user",
-            status: "pending"
+            status: "pending",
+            authen:"no"
         }
 
         const url = `/users?email=${email}`
