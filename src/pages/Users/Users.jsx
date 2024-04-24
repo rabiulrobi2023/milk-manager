@@ -1,4 +1,5 @@
-import useApprovedUsers from "../../hooks/ApprovedUsers/useApprovedUsers";
+
+import useApprovedUsers from "../../hooks/useApprovedUsers";
 import User from "../User/User";
 
 

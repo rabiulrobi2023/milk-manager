@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
+
 import PendingUser from "../PendingUser/PendingUser";
 import { useContext } from "react";
 import { pendingUserContext } from "../../Provider/PendingUserProvider";
+import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 
 const PendingUsers = () => {
     const {pendingUsers,setPendingUsers}=useContext(pendingUserContext)

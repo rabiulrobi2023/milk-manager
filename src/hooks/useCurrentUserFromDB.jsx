@@ -1,6 +1,6 @@
-import useAuth from '../Auth/useAuth';
+import useAuth from './useAuth';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosGeneral from '../Axios/useAxiosGeneral';
+import useAxiosGeneral from './useAxiosGeneral';
 
 const useCurrentUserFromDB= () => {
     const axiosGeneral=useAxiosGeneral()

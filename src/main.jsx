@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import router from './router/PublicRouter.jsx';
+import router from './router/PublicRoute.jsx';
 import {
   RouterProvider
 } from "react-router-dom";
@@ -11,7 +11,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import PendingUserProvider from './Provider/PendingUserProvider.jsx';
-
+import ImportExportProveder from './Provider/ImportExportProveder.jsx';
 const queryClient = new QueryClient()
 
 
@@ -23,10 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <RouterProvider router={router} />
         </QueryClientProvider>
       </PendingUserProvider>
-
-
     </AuthProvider>
-
-
   </React.StrictMode>
 );

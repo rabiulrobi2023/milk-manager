@@ -9,20 +9,12 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useCurrentUserFromDB from "../../hooks/useCurrentUserFromDB";
-import useBalanceTotal from "../../hooks/useBalanceTotal";
 
-
-
-const BuyMilk = () => {
+const Sell = () => {
     const axiosGeneral = useAxiosGeneral()
     const { currentUserInDB, refetch, isLoading } = useCurrentUserFromDB()
-    const currentDate = moment().format("YYYY-MM-DD");
+    const currentDate = moment().format("YYYY-MM-DD")
     const navigate = useNavigate()
-    const { stock } = useBalanceTotal()
-    console.log(typeof(stock))
-
-    console.log(parseInt(stock))
-  
 
     const { data: rate } = useQuery({
         queryKey: ["rate"],
@@ -32,7 +24,6 @@ const BuyMilk = () => {
         }
     })
     const presentRate = parseFloat(rate?.newRate).toFixed(2);
-
 
     const {
         register,
@@ -44,25 +35,25 @@ const BuyMilk = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        const purAmount = data.purAmount
-        const price = (purAmount * presentRate).toFixed(2)
-        const buyingInfo = {
-            buyerName: currentUserInDB.name,
-            buyerEmail: currentUserInDB.email,
-            ie: "export",
-            buyingDate: moment(data.purDate).format("YYYY-MM-DD"),
+        const sellAmount = data.sellAmount
+        const price = (sellAmount * presentRate).toFixed(2)
+        const sellInfo = {
+            sellerName: currentUserInDB.name,
+            sellerEmail: currentUserInDB.email,
+            ie: "import",
+            sellingDate: moment(data.sellDate).format("YYYY-MM-DD"),
             reportingDate: currentDate,
-            buyingAmount: purAmount,
+            soldAmount: sellAmount,
             rate: presentRate,
             price: price
         }
-        console.log(buyingInfo)
+        console.log(sellInfo)
 
         Swal.fire({
-            html: `<div class=text-left>
-                <p class="font-bold text-left">Date: ${moment(data.purDate).format("DD-MMM-YYYY")}</p>
-                <p>Amount: ${purAmount} Litter</p>
-                <p>Rate: ${presentRate} TK</p>
+            html: `<div class=text-left text-[10px]>
+                <p class="font-bold text-left">Date: ${moment(data.sellDate).format("DD-MMM-YYYY")}</p>
+                <p>Amount: ${sellAmount} Litter</p>
+                <p>Rate: ${presentRate} TK/LTR</p>
                 <p>Total: ${price} TK</p>
    
             </div>`,
@@ -76,28 +67,28 @@ const BuyMilk = () => {
             width: "280px",
 
             customClass: {
-                cancelButtonColor: "w-[90px] text-center",
-                confirmButton: "w-[90px]",
-                popup: "text-[14px] md:ml-[200px] align-left ",
+                cancelButtonColor: "w-[80px]",
+                confirmButton: "w-[90px] text-center",
+                popup: "text-[10px] md:ml-[200px] ",
                 html: "text-left",
 
             }
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axiosGeneral.post("/exports", buyingInfo)
+                    axiosGeneral.post("/imports", sellInfo)
                         .then(res => {
                             if (res.data.insertedId) {
                                 Swal.fire({
                                     icon: "success",
-                                    title: "Purches successfull",
+                                    title: "Sell successful",
                                     showConfirmButton: false,
                                     width: "280px",
                                     timer: 3000,
                                     customClass: {
-                                        title: 'text-[10px] text-green-600',
+                                        title: 'text-[20px] text-green-600',
                                         icon: 'text-[12px]',
-                                        popup: 'text-gray-600 text-sm pt-0 md:ml-[200px] text-[11px]',
+                                        popup: 'text-gray-600 text-sm pt-0 ml-[200px]',
 
                                     }
                                 });
@@ -114,27 +105,26 @@ const BuyMilk = () => {
         <div className="mx-auto flex justify-center items-center h-[calc(100vh-100px)] text-gray-600 ">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-3 w-[280px] md:w-[400px] mx-auto border-2 p-10 rounded-md">
-                    <p className="text-center font-bold text-lg">Buy Milk</p>
+                    <p className="text-center font-bold text-lg">Sell Milk</p>
                     <div className="flex justify-center h-20">
                         <img src="https://i.ibb.co/ss6sT09/milk-glass2.png" alt="" className="h-full w-auto" />
                     </div>
                     <div className="flex flex-col">
-                        <label>Purchased Date<span className="text-red-500">*</span></label>
+                        <label>Sell Date<span className="text-red-500">*</span></label>
                         <input type="date"
-                            name="purDate"
+                            name="sellDate"
                             className="border-[1px]  px-2 py-1 rounded-sm"
                             slot=".5"
-                            defaultValue={moment().format("YYYY-MM-DD")}
-                            {...register("purDate", {
+                            defaultValue={currentDate}
+                            {...register("sellDate", {
                                 required: "Date is required",
                                 validate: value =>
-                                    value <= currentDate || "The selected date must the present date or a date before the present date.",
-
+                                    value <= currentDate || "The selected date must the present date or a date before the present date."
 
                             })}
                         />
                         {
-                            errors.purDate && (<p role="alert" className="text-red-600">{errors.purDate.message}</p>)
+                            errors.sellDate && (<p role="alert" className="text-red-600">{errors.sellDate.message}</p>)
                         }
 
                     </div>
@@ -142,21 +132,20 @@ const BuyMilk = () => {
                     <div className="flex flex-col">
                         <label>Amount<span className="text-red-500">*</span></label>
                         <input
-                            name="purAmount"
+                            name="sellAmount"
                             type="number"
                             min="0.5"
                             step=".25"
                             placeholder="Enter Amount in Litter"
                             className="border-[1px]  px-2 py-1 rounded-sm"
-                            {...register("purAmount", {
-                                required: "Amount is required",
-                                validate:{
-                                    stockValidte: value => value <= stock ? true : "Unavailable Stock",
-                                    zeroValidate: value=> value>0 || "Amount must be greater than zero"
-                                }
+                            {...register("sellAmount", {
+                                required: true
                             })}
+
                         />
-                        {errors.purAmount && (<p role="alert" className="text-red-600">{errors.purAmount.message}</p>)}
+                        {errors.sellAmount?.type === "required" && (
+                            <p role="alert" className="text-red-600">Amount is required</p>
+                        )}
 
                     </div>
 
@@ -169,4 +158,4 @@ const BuyMilk = () => {
     );
 };
 
-export default BuyMilk;
+export default Sell;

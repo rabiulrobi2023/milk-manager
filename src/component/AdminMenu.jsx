@@ -7,10 +7,11 @@ import { PiHandsPrayingFill } from "react-icons/pi";
 import { LiaHandsHelpingSolid } from "react-icons/lia";
 import { GiMilkCarton } from "react-icons/gi";
 import { FaHandHoldingWater } from "react-icons/fa";
-import useCurrentUserFromDB from "../hooks/CurrentUserFromDB/useCurrentUserFromDB";
-import useFindPendingUsers from "../hooks/FindPendingUsers/useFindPendingUsers";
+import useCurrentUserFromDB from "../hooks/useCurrentUserFromDB";
+import useFindPendingUsers from "../hooks/useFindPendingUsers";
 import { useContext } from "react";
 import { pendingUserContext } from "../Provider/PendingUserProvider";
+import { TbDatabaseEdit } from "react-icons/tb";
 
 const AdminMenu = () => {
     const { currentUserInDB } = useCurrentUserFromDB()
@@ -22,9 +23,9 @@ const AdminMenu = () => {
     const {foundUsersInDB,isLoading,refetch}= useFindPendingUsers(url,criteria) 
     const numberOfPendingUsers1=foundUsersInDB?.length
  
-
     const { pendingUsers } = useContext(pendingUserContext)
     const numberOfPendingUsers2 = pendingUsers?.length
+
 
     const BuyerMenu =
         <>
@@ -38,7 +39,7 @@ const AdminMenu = () => {
                     <li ><NavLink to="/dashboard/acc-request"><PiHandsPrayingFill className="text-[18px]" />Account Request{numberOfPendingUsers2? <span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingUsers2}</span>:<span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingUsers1}</span>}</NavLink></li>
                     <li><NavLink to="/error"><LiaHandsHelpingSolid className="text-[18px]" />Payment Request</NavLink></li>
                     <li><NavLink to="/error"><GiMilkCarton className="text-[18px]" />Supply Request</NavLink></li>
-                    <li><NavLink to="/error"><FaHandHoldingWater className="text-[18px]" />Purchases  Request</NavLink></li>
+                    <li ><NavLink to="/dashboard/new-rate"><TbDatabaseEdit className="text-[18px]" />Change Rate</NavLink></li>
                 </>
             }
         </>

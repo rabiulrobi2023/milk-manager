@@ -7,8 +7,9 @@ import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
+
 import Swal from "sweetalert2";
+import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 
 const Login = () => {
     const axiosGeneral = useAxiosGeneral()
@@ -166,7 +167,7 @@ const Login = () => {
     return (
         
        
-        <div className="mx-auto flex justify-center items-center h-screen text-gray-700  ">
+        <div className="mx-auto flex justify-center items-center h-[100vh] text-gray-700  ">
             
             <form onSubmit={handleSubmit(onSubmit)} className="bg-[#0707070c]">
                 <div className="flex flex-col gap-3 w-[calc(100vw-60px)] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-[url(https://i.ibb.co/sJ74JtY/milk-icon2.png)] bg-no-repeat bg-center bg-blend-lighten  ">

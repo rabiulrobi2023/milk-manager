@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import  { useContext } from 'react';
-import { authContext } from '../../Provider/AuthProvider';
-import useAxiosGeneral from '../Axios/useAxiosGeneral';
+import useAxiosGeneral from './useAxiosGeneral';
 
 const useApprovedUsers = () => {
     

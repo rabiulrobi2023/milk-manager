@@ -10,8 +10,12 @@ import StartingLayout from "../Layout/StartingLayout/StartingLayout";
 import SignUp from "../pages/SignUp/SignUp";
 import PendingUsers from "../pages/PendingUsers/PendingUsers";
 import Users from "../pages/Users/Users";
-import PrivetRoutes from "./PrivetRoutes";
-import AdminRoutes from "./AdminRoutes";
+
+
+import Rate from "../pages/Rate/Rate";
+import SellerRoute from "./SellerRoute";
+import Sell from "../pages/Sell/Sell";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -36,7 +40,7 @@ const router = createBrowserRouter([
 
   {
     path: "dashboard",
-    element: <PrivetRoutes><MainLayout></MainLayout></PrivetRoutes>,
+    element: <MainLayout></MainLayout>,
     children: [
       {
         path: "home",
@@ -56,8 +60,17 @@ const router = createBrowserRouter([
       },
       {
         path:"users",
-        element:<AdminRoutes><Users></Users></AdminRoutes>
+        element:<AdminRoute></AdminRoute>
+      },
+      {
+        path:"new-rate",
+        element:<Rate></Rate>
+      },
+      {
+        path:"sell",
+        element:<SellerRoute><Sell></Sell></SellerRoute>
       }
+
     ]
 
 

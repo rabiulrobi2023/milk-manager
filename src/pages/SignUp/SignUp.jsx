@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { GoEyeClosed } from "react-icons/go";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
+
 import Swal from "sweetalert2";
+import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 
 
 const SignUp = () => {
@@ -123,7 +124,7 @@ const SignUp = () => {
        
     }
     return (
-        <div className="mx-auto flex justify-center items-center h-screen text-gray-600">
+        <div className="mx-auto flex justify-center items-center h-[100vh] text-gray-600">
             <form onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-3 w-[calc(100vw-60px)]  md:w-[400px] md:mx-auto shadow-2xl shadow-stone-400 p-6 rounded-md bg-no-repeat bg-center bg-blend-lighten  ">
 

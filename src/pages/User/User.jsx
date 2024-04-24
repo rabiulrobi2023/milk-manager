@@ -1,7 +1,8 @@
 import Swal from "sweetalert2";
-import useAxiosGeneral from "../../hooks/Axios/useAxiosGeneral";
-import useCurrentUserFromDB from "../../hooks/CurrentUserFromDB/useCurrentUserFromDB";
+import useAxiosGeneral from "../../hooks/useAxiosGeneral";
+
 import { useNavigate } from "react-router-dom";
+import useCurrentUserFromDB from "../../hooks/useCurrentUserFromDB";
 
 
 const User = ({ user, index, refetch }) => {
@@ -79,8 +80,6 @@ const User = ({ user, index, refetch }) => {
             html: `Are you sure delete the account request?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
-
-
             cancelButtonColor: "#168a40",
             confirmButtonColor: "#eb4654",
             background: "white",

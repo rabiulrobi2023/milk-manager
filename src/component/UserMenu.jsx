@@ -4,8 +4,8 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useContext } from "react";
 import { authContext } from "../Provider/AuthProvider";
-import useAuth from "../hooks/Auth/useAuth";
-import useCurrentUserFromDB from "../hooks/CurrentUserFromDB/useCurrentUserFromDB";
+import useAuth from "../hooks/useAuth";
+import useCurrentUserFromDB from "../hooks/useCurrentUserFromDB";
 
 
 

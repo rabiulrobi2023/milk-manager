@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { FcDonate } from "react-icons/fc";
 import { RxDashboard } from "react-icons/rx";
-import useCurrentUserFromDB from "../hooks/CurrentUserFromDB/useCurrentUserFromDB";
+import useCurrentUserFromDB from "../hooks/useCurrentUserFromDB";
 
 const BuyerMenu = () => {
     const { currentUserInDB, refetch, isLoading } = useCurrentUserFromDB()

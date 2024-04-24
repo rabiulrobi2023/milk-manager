@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosGeneral from "../Axios/useAxiosGeneral";
+import useAxiosGeneral from "./useAxiosGeneral";
 
 
 const useFindPendingUsers= (url,criteria) => {
