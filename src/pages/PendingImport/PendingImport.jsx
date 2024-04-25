@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 import moment from "moment";
+import { reload } from "firebase/auth";
 
 
 
@@ -51,6 +52,7 @@ const PendingImport = ({pendingImport,refetch,index}) => {
                                         popup: 'text-gray-600 text-sm pt-0',
                                     }
                                 });
+                                window.location.reload()
                             }
                             
                         })

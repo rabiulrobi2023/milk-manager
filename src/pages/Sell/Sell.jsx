@@ -93,10 +93,14 @@ const Sell = () => {
                                         popup: 'text-gray-600 text-sm pt-0 ml-[200px]',
 
                                     }
+                                    
                                 });
                                 navigate("/dashboard")
+                                
+                               
 
                             }
+                           
                         })
                 }
             });

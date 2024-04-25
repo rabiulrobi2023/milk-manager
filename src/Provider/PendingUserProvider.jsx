@@ -5,10 +5,13 @@ export const pendingUserContext= createContext(null)
 const PendingUserProvider = ({children}) => {
     // const [pendingUsers, setPendingUsers]=useState(0)
     const [pendingUsers, setPendingUsers] = useState(0);
+    const [currentStock,setCurrentStock]=useState(0)
 
     const info = {
         pendingUsers,
-        setPendingUsers
+        setPendingUsers,
+        currentStock,
+        setCurrentStock
     }
 
     return (

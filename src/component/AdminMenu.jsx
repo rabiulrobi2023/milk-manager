@@ -41,7 +41,7 @@ const AdminMenu = () => {
                     <li><NavLink to="/error"><BiPurchaseTagAlt className="text-[18px]" />Purchased History</NavLink></li>
                     <li><NavLink to="/error"><FaUpDownLeftRight className="text-[18px]" />Supply History</NavLink></li>
                     <li><NavLink to="/error"><FaMoneyBillTrendUp className="text-[18px]" />Payment History</NavLink></li>
-                    <li ><NavLink to="/dashboard/acc-request"><PiHandsPrayingFill className="text-[18px]" />Account Request{numberOfPendingUsers2? <span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingUsers2}</span>:<span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingUsers1}</span>}</NavLink></li>
+                    <li ><NavLink to="/dashboard/acc-request"><PiHandsPrayingFill className="text-[18px]" />Account Request{numberOfPendingUsers2}</NavLink></li>
                     <li><NavLink to="/error"><LiaHandsHelpingSolid className="text-[18px]" />Payment Request</NavLink></li>
 
                     <li><NavLink to="/dashboard/supply-request"><GiMilkCarton className="text-[18px]" />Supply Request{numberOfPendingImp>0?<span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingImp}</span>:""}</NavLink></li>

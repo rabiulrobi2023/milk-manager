@@ -1,26 +1,25 @@
 import moment from "moment";
-import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
-
 import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useCurrentUserFromDB from "../../hooks/useCurrentUserFromDB";
-import useBalanceTotal from "../../hooks/useStok";
+import useStock from "../../hooks/useStok";
 
 
 
 const BuyMilk = () => {
     const axiosGeneral = useAxiosGeneral()
-    const { currentUserInDB, refetch, isLoading } = useCurrentUserFromDB()
+    const { currentUserInDB, refetch} = useCurrentUserFromDB()
     const currentDate = moment().format("YYYY-MM-DD");
     const navigate = useNavigate()
-    const { stock } = useBalanceTotal()
+    const { stock } = useStock()
 
+    const stockInt = parseFloat(stock)
   
+
     const { data: rate } = useQuery({
         queryKey: ["rate"],
         queryFn: async () => {
@@ -34,9 +33,6 @@ const BuyMilk = () => {
     const {
         register,
         handleSubmit,
-        reset,
-        watch,
-        control,
         formState: { errors },
     } = useForm()
 
@@ -85,6 +81,7 @@ const BuyMilk = () => {
                     axiosGeneral.post("/exports", buyingInfo)
                         .then(res => {
                             if (res.data.insertedId) {
+                                refetch()
                                 Swal.fire({
                                     icon: "success",
                                     title: "Purches successfull",
@@ -95,16 +92,14 @@ const BuyMilk = () => {
                                         title: 'text-[10px] text-green-600',
                                         icon: 'text-[12px]',
                                         popup: 'text-gray-600 text-sm pt-0 md:ml-[200px] text-[11px]',
-
                                     }
                                 });
                                 navigate("/dashboard")
-
+                                window.location.reload()
                             }
                         })
                 }
             });
-
     }
 
     return (
@@ -125,8 +120,7 @@ const BuyMilk = () => {
                             {...register("purDate", {
                                 required: "Date is required",
                                 validate: value =>
-                                    value <= currentDate || "The selected date must the present date or a date before the present date.",
-
+                                    value <= currentDate || "The selected date must the present date or a date before the present date."
 
                             })}
                         />
@@ -147,9 +141,9 @@ const BuyMilk = () => {
                             className="border-[1px]  px-2 py-1 rounded-sm"
                             {...register("purAmount", {
                                 required: "Amount is required",
-                                validate:{
-                                    stockValidte: value => value <= stock ? true : "Unavailable Stock",
-                                    zeroValidate: value=> value>0 || "Amount must be greater than zero"
+                                validate: {
+                                    stockValidte: value => value <= stockInt || "Unavailable Stock",
+                                    zeroValidate: value => value > 0 || "Amount must be greater than zero"
                                 }
                             })}
                         />
