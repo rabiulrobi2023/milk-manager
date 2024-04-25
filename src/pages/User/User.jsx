@@ -15,7 +15,7 @@ const User = ({ user, index, refetch }) => {
     // console.log(currentUserInDB._id)
     // console.log(_id)
 
-
+console.log(user)
     const updateData1 = {
         role: "admin"
     }
@@ -36,7 +36,7 @@ const User = ({ user, index, refetch }) => {
             customClass: {
                 cancelButtonColor: "w-[60px]",
                 confirmButton: "w-[60px]",
-                popup: "text-[14px]",
+                popup: "text-[14px] md:ml-[200px]",
             }
 
         })
@@ -55,7 +55,7 @@ const User = ({ user, index, refetch }) => {
                                 customClass: {
                                     title: 'text-[20px] text-green-600',
                                     icon: 'text-[12px]',
-                                    popup: 'text-gray-600 text-sm pt-0',
+                                    popup: 'text-gray-600 text-sm pt-0 md:ml-[200px]',
                                 }
                             });
                             refetch()
@@ -77,7 +77,7 @@ const User = ({ user, index, refetch }) => {
 
     const handleDelete = () => {
         Swal.fire({
-            html: `Are you sure delete the account request?`,
+            html: `Are you sure delete the account?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",
@@ -88,7 +88,7 @@ const User = ({ user, index, refetch }) => {
             customClass: {
                 cancelButtonColor: "w-[60px]",
                 confirmButton: "w-[60px]",
-                popup: "text-[14px]",
+                popup: "text-[14px] md:ml-[200px]",
             }
 
         }).then((result) => {

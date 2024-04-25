@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useCurrentUserFromDB from "../../hooks/useCurrentUserFromDB";
-import useBalanceTotal from "../../hooks/useBalanceTotal";
+import useBalanceTotal from "../../hooks/useStok";
 
 
 
@@ -19,11 +19,8 @@ const BuyMilk = () => {
     const currentDate = moment().format("YYYY-MM-DD");
     const navigate = useNavigate()
     const { stock } = useBalanceTotal()
-    console.log(typeof(stock))
 
-    console.log(parseInt(stock))
   
-
     const { data: rate } = useQuery({
         queryKey: ["rate"],
         queryFn: async () => {

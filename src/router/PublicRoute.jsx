@@ -16,6 +16,7 @@ import Rate from "../pages/Rate/Rate";
 import SellerRoute from "./SellerRoute";
 import Sell from "../pages/Sell/Sell";
 import AdminRoute from "./AdminRoute";
+import PendingImports from "../pages/PendingImports/PendingImports";
 
 
 
@@ -56,11 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path:"acc-request",
-        element: <PendingUsers></PendingUsers>
+        element: <AdminRoute><PendingUsers></PendingUsers></AdminRoute>
       },
       {
         path:"users",
-        element:<AdminRoute></AdminRoute>
+        element:<AdminRoute><Users></Users></AdminRoute>
       },
       {
         path:"new-rate",
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path:"sell",
         element:<SellerRoute><Sell></Sell></SellerRoute>
+      },
+      {
+        path:"supply-request",
+        element:<PendingImports></PendingImports>
       }
 
     ]

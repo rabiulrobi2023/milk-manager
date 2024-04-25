@@ -45,7 +45,8 @@ const Sell = () => {
             reportingDate: currentDate,
             soldAmount: sellAmount,
             rate: presentRate,
-            price: price
+            price: price,
+            status:"pending"
         }
         console.log(sellInfo)
 
@@ -82,11 +83,12 @@ const Sell = () => {
                                 Swal.fire({
                                     icon: "success",
                                     title: "Sell successful",
+                                    html:"Please wait for maneger's approval",
                                     showConfirmButton: false,
                                     width: "280px",
                                     timer: 3000,
                                     customClass: {
-                                        title: 'text-[20px] text-green-600',
+                                        title: 'text-[16px] text-green-600',
                                         icon: 'text-[12px]',
                                         popup: 'text-gray-600 text-sm pt-0 ml-[200px]',
 

@@ -6,6 +6,7 @@ import User from "../User/User";
 const Users = () => {
     const {approvedUsers, refetch, isLoading}=useApprovedUsers()
     console.log(approvedUsers, isLoading)
+    
     if(isLoading){
         return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
      }

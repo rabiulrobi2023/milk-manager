@@ -58,14 +58,13 @@ const PendingUsers = () => {
                             <tbody>
                                 <>
                                     {
-                                        users?.map((user, index, refatch) => <PendingUser user={user} key={user._id} index={index} refetch={refetch}></PendingUser>)
+                                        users?.map((user, index) => <PendingUser user={user} key={user._id} index={index} refetch={refetch}></PendingUser>)
                                     }
                                 </>
                             </tbody>
 
                         </table>
                     </div>
-
             }
 
         </div>

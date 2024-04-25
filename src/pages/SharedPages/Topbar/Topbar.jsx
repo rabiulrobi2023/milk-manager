@@ -9,20 +9,20 @@ import SellerMenu from "../../../component/SellerMenu";
 import useAxiosGeneral from "../../../hooks/useAxiosGeneral";
 import { useQuery } from "@tanstack/react-query";
 
+
 import useExpTotal from "../../../hooks/useExpTotal";
-import useImpTotal from "../../../hooks/useImpTotal";
+import useApprovedImp from "../../../hooks/useApprovedImp";
 
 
 const Topbar = () => {
     const axiosGeneral = useAxiosGeneral()
-    const { importTotal }= useImpTotal()
-    const { exportTotal }= useExpTotal()
+    const { approvedImp,refetch}= useApprovedImp()
+    const { exportTotal }=  useExpTotal()
 
-    console.log(importTotal)
-    console.log(exportTotal)
 
-    const stock = (importTotal?.impTotalAmount-exportTotal?.expTotalAmount).toFixed(2);
-    console.log(stock)
+    const stock = (approvedImp?.impTotalAmount-exportTotal?.expTotalAmount).toFixed(2);
+ 
+
 
 
     const { data: rate } = useQuery({
@@ -33,6 +33,7 @@ const Topbar = () => {
         }
     })
     const finalRate = rate?.newRate.toFixed(2)
+    refetch()
 
 
 

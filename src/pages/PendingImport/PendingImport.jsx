@@ -1,23 +1,23 @@
-import { useContext } from "react";
-import AuthProvider, { authContext } from "../../Provider/AuthProvider";
-
 import Swal from "sweetalert2";
 import useAxiosGeneral from "../../hooks/useAxiosGeneral";
-<link rel="stylesheet" href="sweetalert2.min.css"></link>
+import moment from "moment";
 
 
-const PendingUser = ({ user, index, refetch }) => {
-    const { name, email, type, password, _id } = user;
+
+const PendingImport = ({pendingImport,refetch,index}) => {
+    const  {_id,sellerName,sellerEmail,sellingDate,soldAmount,rate,price}=pendingImport
+
+
+
+  
+    
     const axiosGeneral = useAxiosGeneral()
-    const { createUser } = useContext(authContext)
-
-
     const updateData = {
         status: "approved"
     }
     const handleApporve = () => {
         Swal.fire({
-            html: `Are you sure approve the user?`,
+            html: `Are you sure accept the supply request?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",
@@ -34,11 +34,11 @@ const PendingUser = ({ user, index, refetch }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axiosGeneral.patch(`/users/${_id}`, updateData)
+                    axiosGeneral.patch(`/imports/${_id}`, updateData)
                         .then(res => {
-                            console.log(res.data)
                             refetch()
-                            if (res.data.modifiedCount > 0) {
+                            console.log(res.data.modifiedCount)
+                            if(res.data.modifiedCount>0){
                                 Swal.fire({
                                     icon: "success",
                                     title: "Approved",
@@ -52,6 +52,7 @@ const PendingUser = ({ user, index, refetch }) => {
                                     }
                                 });
                             }
+                            
                         })
                 }
             });
@@ -76,7 +77,7 @@ const PendingUser = ({ user, index, refetch }) => {
 
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosGeneral.delete(`/users/${_id}`)
+                axiosGeneral.delete(`/imports/${_id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()
@@ -102,16 +103,20 @@ const PendingUser = ({ user, index, refetch }) => {
     }
 
 
+
     return (
         <tr className="h-10 hover:bg-[#cecccc32] text-center max-w-fit  ">
             <td className="border-[1px] min-w-fit">{index + 1}</td>
-            <td className="border-[1px] text-left whitespace-nowrap">{name}</td>
-            <td className="border-[1px] text-left">{email}</td>
-            <td className="border-[1px] capitalize ">{type}</td>
+            <td className="border-[1px] ">{moment(sellingDate).format("DD-MMM-YYYY")}</td>
+            <td className="border-[1px] text-left whitespace-nowrap">{sellerName}</td>
+            <td className="border-[1px] text-left">{sellerEmail}</td>
+            <td className="border-[1px] text-center">{soldAmount.toFixed(2)} LTR</td>
+            <td className="border-[1px] text-center">{rate.toFixed(2)} TK/L</td>
+            <td className="border-[1px] left normal-nums ">{price.toFixed(2)} TK</td>
             <td className="border-[1px] text-green-600 cursor-pointer hover:scale-125 hover:text-green-500" onClick={handleApporve}>Approve</td>
             <td className="border-[1px] text-red-600 cursor-pointer hover:text-red-500 hover:scale-125" onClick={handleDelete}>Delete</td>
         </tr>
     );
 };
 
-export default PendingUser;
+export default PendingImport;
