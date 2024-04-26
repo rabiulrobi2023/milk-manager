@@ -10,9 +10,11 @@ const MainLayout = () => {
                 <Sidebar></Sidebar>
                 <div className="w-full">
                     <Topbar></Topbar>
-                    <div className="bg-gray-50 h-[calc(100vh-80px)]">
+                    <div className="bg-gray-50 h-[calc(100vh-90px)] relative">
                         <Outlet></Outlet>
+                        <p className="text-xs absolute   -right-0 px-2 md:px-9 bottom-0 text-gray-500">Develop by: Md. Rabiul Islam</p>
                     </div>
+                    
                 </div>
             </div>
         </div>

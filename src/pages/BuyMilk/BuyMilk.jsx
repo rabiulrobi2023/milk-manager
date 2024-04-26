@@ -105,7 +105,7 @@ const BuyMilk = () => {
     return (
         <div className="mx-auto flex justify-center items-center h-[calc(100vh-100px)] text-gray-600 ">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col gap-3 w-[280px] md:w-[400px] mx-auto border-2 p-10 rounded-md">
+                <div className="flex flex-col gap-3 w-[280px] md:w-[400px] mx-auto border-2 p-10 rounded-md bg-opacity-40 bg-yell ">
                     <p className="text-center font-bold text-lg">Buy Milk</p>
                     <div className="flex justify-center h-20">
                         <img src="https://i.ibb.co/ss6sT09/milk-glass2.png" alt="" className="h-full w-auto" />

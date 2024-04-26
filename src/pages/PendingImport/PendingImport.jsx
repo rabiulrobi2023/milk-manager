@@ -63,7 +63,7 @@ const PendingImport = ({pendingImport,refetch,index}) => {
 
     const handleDelete = () => {
         Swal.fire({
-            html: `Are you sure delete the account request?`,
+            html: `Are you sure delete the supply request?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",

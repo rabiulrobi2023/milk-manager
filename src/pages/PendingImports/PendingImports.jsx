@@ -3,9 +3,9 @@ import PendingImport from "../PendingImport/PendingImport";
 
 
 const PendingImports = () => {
-    const {pendingImportInfo,importerInfo, isLoading, refetch}=usePendigImport()
-   const pendingImporterData = pendingImportInfo?.importerInfo;
-   console.log("Data",pendingImporterData)
+    const { pendingImportInfo, importerInfo, isLoading, refetch } = usePendigImport()
+    const pendingImporterData = pendingImportInfo?.importerInfo;
+    console.log("Data", pendingImporterData)
 
 
 
@@ -17,10 +17,12 @@ const PendingImports = () => {
 
         <div >
             {
-                pendingImporterData.length===0?
-                    <div className="flex flex-col gap-2  m-auto  h-full pt-10">
-                        <img src="https://i.ibb.co/SJzFQLm/empty.png" alt="" className="w-20 h-20 flex m-auto" />
-                        <p className="text-center">There is no any supply request</p>
+                pendingImporterData.length === 0 ?
+                    <div className="flex flex-col m-auto  h-[calc(100vh-100px)] items-center justify-center">
+                        <div className="space-y-3">
+                            <img src="https://i.ibb.co/SJzFQLm/empty.png" alt="" className="w-20 h-20 flex m-auto" />
+                            <p className="text-center">There is no any supply request</p>
+                        </div>
                     </div>
 
                     :
@@ -36,7 +38,7 @@ const PendingImports = () => {
                                     <td className="border-[1px] ">Supplier Name</td>
                                     <td className="border-[1px]">Supplier Email</td>
                                     <td className="border-[1px]">Amount</td>
-                                    <td className="border-[1px]">Rate</td>                                 
+                                    <td className="border-[1px]">Rate</td>
                                     <td className="border-[1px]">Price</td>
                                     <td className="border-[1px] " colSpan={2}>Action</td>
 
@@ -45,7 +47,7 @@ const PendingImports = () => {
                             <tbody>
                                 <>
                                     {
-                                      pendingImporterData.map((pendingImport, index) => <PendingImport pendingImport={pendingImport} key={pendingImport._id} index={index} refetch={refetch}></PendingImport>)
+                                        pendingImporterData.map((pendingImport, index) => <PendingImport pendingImport={pendingImport} key={pendingImport._id} index={index} refetch={refetch}></PendingImport>)
                                     }
                                 </>
                             </tbody>

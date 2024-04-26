@@ -38,7 +38,7 @@ const Topbar = () => {
 
 
     return (
-        <div className="h-20 bg-gray-700 px-2 md:px-9  items-center flex flex-row ">
+        <div className="h-[80px] bg-gray-800 px-2 md:px-9  items-center flex ">
             <div className="navbar-start md:hidden flex-none w-[30px]">
 
                 <div className="drawer">
@@ -75,14 +75,14 @@ const Topbar = () => {
 
 
             </div>
-            <div className="flex flex-grow items-center  justify-between">
+            <div className="flex content-between items-center justify-between flex-grow  mx-auto ">
                 <div className="">
                     <img src="https://i.ibb.co/sJ74JtY/milk-icon2.png" className="w-10 md:w-16" alt="" />
                 </div>
-                <p className="text-sm md:text-2xl  font-bold text-gray-400  "><span className="text-yellow-600 ">Milk</span> Management</p>
+                <p className="text-sm md:text-2xl  font-bold text-gray-400 pl-4 md:pl-4 "><span className="text-yellow-600 ">Milk</span> Management</p>
                 <div className="gap-[4px] items-center font-bold text-center text-yellow-600">
                     <p className="text-[12px] md:text-base text-green-500">Stock: {stock} LTR</p>
-                    <p className="text-[10px] md:text-base ">Rate: {finalRate}TK/L </p>
+                    <p className="text-[10px] md:text-base ">Rate: {finalRate} TK/L </p>
 
                 </div>
             </div>

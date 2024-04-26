@@ -37,7 +37,7 @@ const AdminMenu = () => {
             {
                 currentUserInDB?.role == "admin" && <>
                     <p className="font-bold">Admin Related</p>
-                    <li><NavLink to="/dashboard/users"><PiUsersFourLight className="text-[18px]" />User List</NavLink></li>
+                    <li><NavLink to="/dashboard/users" ><PiUsersFourLight className="text-[18px] active:text-red-500 " />User List</NavLink></li>
                     <li><NavLink to="/error"><BiPurchaseTagAlt className="text-[18px]" />Purchased History</NavLink></li>
                     <li><NavLink to="/error"><FaUpDownLeftRight className="text-[18px]" />Supply History</NavLink></li>
                     <li><NavLink to="/error"><FaMoneyBillTrendUp className="text-[18px]" />Payment History</NavLink></li>
