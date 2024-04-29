@@ -17,6 +17,8 @@ import SellerRoute from "./SellerRoute";
 import Sell from "../pages/Sell/Sell";
 import AdminRoute from "./AdminRoute";
 import PendingImports from "../pages/PendingImports/PendingImports";
+import PaymentRequestsToSeller from "../pages/PaymentRequestsToSeller/PaymentRequestsToSeller";
+import PaymentReqToManger from "../pages/PaymentReqToManager/PaymentReqToManger";
 
 
 
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
       {
         path:"supply-request",
         element:<PendingImports></PendingImports>
+      },
+      {
+        path:"payment-request-to-seller",
+        element: <PaymentRequestsToSeller></PaymentRequestsToSeller>
+      },
+      {
+        path:"payment-request-to-manager",
+        element:<PaymentReqToManger></PaymentReqToManger>
       }
 
     ]

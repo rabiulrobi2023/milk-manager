@@ -38,7 +38,7 @@ const Topbar = () => {
 
 
     return (
-        <div className="h-[80px] bg-gray-800 px-2 md:px-9  items-center flex ">
+        <div className="h-[90px] bg-gray-800 px-2 md:px-9  items-center flex ">
             <div className="navbar-start md:hidden flex-none w-[30px]">
 
                 <div className="drawer">

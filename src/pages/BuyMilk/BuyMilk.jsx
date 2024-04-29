@@ -120,7 +120,7 @@ const BuyMilk = () => {
                             {...register("purDate", {
                                 required: "Date is required",
                                 validate: value =>
-                                    value <= currentDate || "The selected date must the present date or a date before the present date."
+                                    value <= currentDate || "The selected date must the present date or a date before the present date"
 
                             })}
                         />

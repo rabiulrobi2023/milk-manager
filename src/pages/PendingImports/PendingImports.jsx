@@ -5,14 +5,9 @@ import PendingImport from "../PendingImport/PendingImport";
 const PendingImports = () => {
     const { pendingImportInfo, importerInfo, isLoading, refetch } = usePendigImport()
     const pendingImporterData = pendingImportInfo?.importerInfo;
-    console.log("Data", pendingImporterData)
+  
 
-
-
-
-    if (isLoading) {
-        return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
-    }
+  
     return (
 
         <div >
@@ -27,6 +22,9 @@ const PendingImports = () => {
 
                     :
                     <div className="overflow-x-auto p-5">
+                        {
+                            isLoading&&<p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
+                        }
 
                         <p className="text-center font-bold mb-2 underline text-lg text-gray-600">New Supply Request</p>
                         <table className="table table-xs table-pin-rows table-pin-cols">

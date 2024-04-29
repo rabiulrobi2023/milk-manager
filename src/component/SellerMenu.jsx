@@ -18,7 +18,7 @@ const SellerMenu = () => {
             <p className="font-bold">Seller Related</p>
             <li><NavLink to="/dashboard/home"><RxDashboard className="text-[18px]" />Home</NavLink></li>
             <li><NavLink to="/dashboard/sell"><TbPackageExport className="text-[18px]" />Sell Now</NavLink></li>
-            <li><NavLink to="/dashboard/payment-req-seller"><PiHandsPrayingFill className="text-[18px]" />Payment Requests</NavLink></li>
+            <li><NavLink to="/dashboard/payment-request-to-seller"><PiHandsPrayingFill className="text-[18px]" />Payment Requests</NavLink></li>
         </>
         }
 
