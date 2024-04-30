@@ -7,8 +7,12 @@ const PaymentRequest = ({request, index, refetch}) => {
     const {_id, paymentDate,payerName,payerEmail,paymentAmount,payerRole}=request;
     console.log(request)
     const paymentAmountInt = parseFloat(paymentAmount)
-    const updateData = {
+    const updateStatus = {
         status: "approved"
+    }
+
+    const updateReject={
+        rejected:"yes"
     }
     const axiosGeneral = useAxiosGeneral()
     const handleApporve = () => {
@@ -30,7 +34,7 @@ const PaymentRequest = ({request, index, refetch}) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axiosGeneral.patch(`/payments/${_id}`,updateData)
+                    axiosGeneral.patch(`/payments/${_id}`,updateStatus)
                         .then(res => {
                             if (res.data.modifiedCount > 0) {
                                 Swal.fire({
@@ -55,9 +59,9 @@ const PaymentRequest = ({request, index, refetch}) => {
 
     }
 
-    const handleDelete = () => {
+    const handleReject = () => {
         Swal.fire({
-            html: `Are you sure delete the payment request?`,
+            html: `Are you sure reject the payment request?`,
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonColor: "#168a40",
@@ -73,9 +77,9 @@ const PaymentRequest = ({request, index, refetch}) => {
 
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosGeneral.delete(`/payments/${_id}`)
+                axiosGeneral.patch(`/payments/${_id}`,updateReject)
                     .then(res => {
-                        if (res.data.deletedCount > 0) {
+                        if (res.data.modifiedCount > 0) {
                             refetch()
                             Swal.fire({
                                 icon: "success",
@@ -107,7 +111,7 @@ const PaymentRequest = ({request, index, refetch}) => {
             <td className="border-[1px] text-center">{paymentAmountInt.toFixed(2)} TK</td>
             <td className="border-[1px] text-center capitalize">{payerRole}</td>
             <td className="border-[1px] text-green-600 cursor-pointer hover:scale-125 hover:text-green-500" onClick={handleApporve}>Approve</td>
-            <td className="border-[1px] text-red-600 cursor-pointer hover:text-red-500 hover:scale-125" onClick={handleDelete}>Delete</td>
+            <td className="border-[1px] text-red-600 cursor-pointer hover:text-red-500 hover:scale-125" onClick={handleReject}>Reject</td>
         </tr>
     );
 };

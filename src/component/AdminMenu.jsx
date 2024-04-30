@@ -16,19 +16,19 @@ import usePendigImport from "../hooks/usePendigImport";
 
 const AdminMenu = () => {
     const { currentUserInDB } = useCurrentUserFromDB()
-    const url="/pending-users"
-    const criteria  = {
-        status:"pending"
+    const url = "/pending-users"
+    const criteria = {
+        status: "pending"
     }
 
-    const {foundUsersInDB}= useFindPendingUsers(url,criteria) 
-    const numberOfPendingUsers1=foundUsersInDB?.length
+    const { foundUsersInDB } = useFindPendingUsers(url, criteria)
+    const numberOfPendingUsers1 = foundUsersInDB?.length
     const { pendingUsers } = useContext(pendingUserContext)
     const numberOfPendingUsers2 = pendingUsers?.length
 
 
-    const {pendingImportInfo, isLoading, refetch}=usePendigImport()
-    const numberOfPendingImp=pendingImportInfo?.importerInfo.length
+    const { pendingImportInfo, isLoading, refetch } = usePendigImport()
+    const numberOfPendingImp = pendingImportInfo?.importerInfo.length
 
 
 
@@ -38,13 +38,14 @@ const AdminMenu = () => {
                 currentUserInDB?.role == "admin" && <>
                     <p className="font-bold">Admin Related</p>
                     <li><NavLink to="/dashboard/users" ><PiUsersFourLight className="text-[18px] active:text-red-500 " />User List</NavLink></li>
+
+                    <li ><NavLink to="/dashboard/acc-request"><PiHandsPrayingFill className="text-[18px]" />Account Request{numberOfPendingUsers2}</NavLink></li>
+                    <li><NavLink to="/dashboard/payment-request-to-manager"><LiaHandsHelpingSolid className="text-[18px]" />Payment Request</NavLink></li>
+                    <li><NavLink to="/dashboard/payment-from-manager"><LiaHandsHelpingSolid className="text-[18px]" />Pay</NavLink></li>
+                    <li><NavLink to="/dashboard/supply-request"><GiMilkCarton className="text-[18px]" />Supply Request{numberOfPendingImp > 0 ? <span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingImp}</span> : ""}</NavLink></li>
                     <li><NavLink to="/error"><BiPurchaseTagAlt className="text-[18px]" />Purchased History</NavLink></li>
                     <li><NavLink to="/error"><FaUpDownLeftRight className="text-[18px]" />Supply History</NavLink></li>
                     <li><NavLink to="/error"><FaMoneyBillTrendUp className="text-[18px]" />Payment History</NavLink></li>
-                    <li ><NavLink to="/dashboard/acc-request"><PiHandsPrayingFill className="text-[18px]" />Account Request{numberOfPendingUsers2}</NavLink></li>
-                    <li><NavLink to="/dashboard/payment-request-to-manager"><LiaHandsHelpingSolid className="text-[18px]" />Payment Request</NavLink></li>
-
-                    <li><NavLink to="/dashboard/supply-request"><GiMilkCarton className="text-[18px]" />Supply Request{numberOfPendingImp>0?<span className="text-white  px-[6px] bg-red-600 rounded-[50px]">{numberOfPendingImp}</span>:""}</NavLink></li>
 
                     <li ><NavLink to="/dashboard/new-rate"><TbDatabaseEdit className="text-[18px]" />Change Rate</NavLink></li>
                 </>

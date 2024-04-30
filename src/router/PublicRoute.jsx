@@ -4,7 +4,7 @@ import {
 import MainLayout from "../Layout/MainLayout/MainLayout";
 import BuyMilk from "../pages/BuyMilk/BuyMilk";
 import Home from "../pages/Home/Home";
-import Pay from "../pages/Pay/Pay";
+import Pay from "../pages/PaymentFromBuyer/PaymentFromBuyer";
 import Login from "../pages/Login/Login";
 import StartingLayout from "../Layout/StartingLayout/StartingLayout";
 import SignUp from "../pages/SignUp/SignUp";
@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import PendingImports from "../pages/PendingImports/PendingImports";
 import PaymentRequestsToSeller from "../pages/PaymentRequestsToSeller/PaymentRequestsToSeller";
 import PaymentReqToManger from "../pages/PaymentReqToManager/PaymentReqToManger";
+import PaymentFromManager from "../pages/PaymentFromManager/PaymentFromManager";
 
 
 
@@ -77,13 +78,19 @@ const router = createBrowserRouter([
         path:"supply-request",
         element:<PendingImports></PendingImports>
       },
+
       {
         path:"payment-request-to-seller",
-        element: <PaymentRequestsToSeller></PaymentRequestsToSeller>
+        element: <SellerRoute><PaymentRequestsToSeller></PaymentRequestsToSeller></SellerRoute>
       },
+
       {
         path:"payment-request-to-manager",
         element:<PaymentReqToManger></PaymentReqToManger>
+      },
+      {
+        path:"payment-from-manager",
+        element:<AdminRoute><PaymentFromManager></PaymentFromManager></AdminRoute>
       }
 
     ]

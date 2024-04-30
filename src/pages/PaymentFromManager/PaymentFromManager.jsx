@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
-const Pay = () => {
+const PaymentFromManager = () => {
     const axiosGeneral = useAxiosGeneral()
     const adminInfo = useAdminInfo()
     const { currentUserInDB } = useCurrentUserFromDB()
@@ -46,13 +46,9 @@ const Pay = () => {
     })
 
 
-
-
-
-
     const onSubmit = (data) => {
         const receiver = JSON.parse(data.receiver)
-        const receiverRole= receiver.role === "admin" ? "manager" : "seller"
+        const receiverRole="seller"
         const paymentInfo = {
             receiverName: receiver.name,
             receiverEmail: receiver.email,
@@ -63,7 +59,8 @@ const Pay = () => {
             paymentAmount: data.amount,
             reportingDate: nowDate,
             status: "pending",
-            payerRole:"buyer"
+            payerRole:"admin",
+            rejected:"no"
         }
 
         console.log(paymentInfo)
@@ -128,11 +125,12 @@ const Pay = () => {
     return (
         <div className="mx-auto flex justify-center items-center h-[calc(100vh-100px)] text-gray-600 ">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col gap-3 w-[280px] md:w-[400px] mx-auto shadow-md p-6 rounded-md">
+                <div className="flex flex-col gap-3 w-[280px] md:w-[400px] mx-auto shadow-md p-6 rounded-md bg- text-">
                     <p className="text-center font-bold text-xl"><span className="text-3xl text-red-400">P</span>ayment</p>
-                    <div className="flex justify-center h-20">
+                    <p className="text-center  ">Managerial payment</p>
+                    {/* <div className="flex justify-center h-20">
                         <img src="https://i.ibb.co/PzWBXMn/payment.png" alt="" className="h-full w-auto" />
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col">
                         <label className="font-bold">Pay To<span className="text-red-500">*</span></label>
@@ -146,11 +144,7 @@ const Pay = () => {
                             })}
                         >
                             <option value="" disabled selected className="text-gray-600">Select Receiver</option>
-                            {
-                                currentUserInDB?.role == "admin" ? ""
-                                    :
-                                    <option value={JSON.stringify(adminInfo)}>Manager- {adminInfo?.name}</option>
-                            }
+                            
                             {
                                 sellers?.map((seller) => (
                                     <option key={seller._id} value={JSON.stringify(seller)}>Seller- {seller.name}</option>
@@ -209,4 +203,4 @@ const Pay = () => {
     );
 };
 
-export default Pay;
+export default PaymentFromManager;

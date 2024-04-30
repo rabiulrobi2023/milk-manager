@@ -10,7 +10,8 @@ const usePaymentRequestToSeller = () => {
                 {
                     params: {
                         receiverRole: "seller",
-                        status: "pending"
+                        status: "pending",
+                        rejected:"no"
                     }
                 }
 

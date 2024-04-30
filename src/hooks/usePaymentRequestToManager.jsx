@@ -10,7 +10,8 @@ const usePaymentRequestToManger = () => {
                 {
                     params: {
                         receiverRole: "manager",
-                        status: "pending"
+                        status: "pending",
+                        rejected:"no"
                     }
                 }
             )
