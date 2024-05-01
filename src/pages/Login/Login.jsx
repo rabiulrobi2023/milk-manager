@@ -112,7 +112,7 @@ const Login = () => {
 
                                             })
                                            
-                                            navigate("/dashboard")
+                                            navigate("/dashboard/home")
                                         }
                                     })
                             }
@@ -137,7 +137,7 @@ const Login = () => {
                                             popup: 'text-green-600 text-sm pt-0',
                                         }
                                     });
-                                    navigate("/dashboard")
+                                    navigate("/dashboard/home")
                                 }
                             })
                     }

@@ -76,10 +76,11 @@ const Topbar = () => {
 
             </div>
             <div className="flex content-between items-center justify-between flex-grow  mx-auto ">
-                <div className="">
+                <div className="flex items-center">
                     <img src="https://i.ibb.co/sJ74JtY/milk-icon2.png" className="w-10 md:w-16" alt="" />
+                    <p className="text-sm md:text-2xl  font-bold text-gray-400 pl-4 md:pl-4 "><span className="text-yellow-600 ">Milk</span><br /> Management</p>
                 </div>
-                <p className="text-sm md:text-2xl  font-bold text-gray-400 pl-4 md:pl-4 "><span className="text-yellow-600 ">Milk</span> Management</p>
+               
                 <div className="gap-[4px] items-center font-bold text-center text-yellow-600">
                     <p className="text-[12px] md:text-base text-green-500">Stock: {stock} LTR</p>
                     <p className="text-[10px] md:text-base ">Rate: {finalRate} TK/L </p>
