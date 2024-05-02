@@ -3,10 +3,12 @@ import useCurrentUserFromDB from "../../hooks/useCurrentUserFromDB";
 import Sidebar from "../SharedPages/Sidebar/Sidebar";
 import Topbar from "../SharedPages/Topbar/Topbar";
 import useAxiosGeneral from "../../hooks/useAxiosGeneral";
+import useAuth from "../../hooks/useAuth";
 
 
 const Home = () => {
     const { currentUserInDB, refetch, isLoading } = useCurrentUserFromDB()
+    const {user}=useAuth()
 
   
    
@@ -17,24 +19,24 @@ const Home = () => {
     const { currentMonthPurIndi } = useQuery({
         queryKey: ["currentMonthPurchaseIndi"],
         queryFn: async () => {
-            const res = await axiosGeneral.get(`/exports/email?email=${currentUserInDB?.email}`)
+            const res = await axiosGeneral.get(`/exports?email=${user?.email}`)
             return res.data;
         }
     })
     console.log(currentMonthPurIndi)
 
 
+   
+
+
+
+
+
+
     if (isLoading) {
         return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20 absolute left-[50%] right-[50%] tran"></p>
 
     }
-
-
-
-
-
-
-
 
 
 
