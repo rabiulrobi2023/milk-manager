@@ -13,7 +13,7 @@ import useAxiosGeneral from "../../hooks/useAxiosGeneral";
 
 const Login = () => {
     const axiosGeneral = useAxiosGeneral()
-    const { loginWithIdPass, user, createUser} = useContext(authContext)
+    const { loginWithIdPass, user, createUser } = useContext(authContext)
 
     const {
         register,
@@ -37,7 +37,7 @@ const Login = () => {
 
 
     const onSubmit = (data) => {
-      
+
         setErrorPass("")
         const email = data.email;
         const password = data.password;
@@ -47,10 +47,10 @@ const Login = () => {
                 const findEmail = res.data.email;
                 const findStatus = res.data.status;
                 const findPassFromDB = res.data.password;
-                const findAuthen= res.data.authen;
+                const findAuthen = res.data.authen;
                 const id = res.data._id
 
-                console.log(findEmail,findStatus,findPassFromDB,findAuthen,id)
+                console.log(findEmail, findStatus, findPassFromDB, findAuthen, id)
                 if (findEmail) {
                     if (findPassFromDB != password) {
                         setErrorPass("Wrong Password")
@@ -70,7 +70,7 @@ const Login = () => {
                             }
                         });
                     }
-                    else if ((findStatus == "approved") && findAuthen=="no") {
+                    else if ((findStatus == "approved") && findAuthen == "no") {
                         Swal.fire({
                             title: "Congratulation!",
                             html: `Your Account has been approved`,
@@ -82,36 +82,36 @@ const Login = () => {
                             customClass: {
                                 confirmButton: "",
                                 popup: "text-[14px] text-green-600",
-                                title:"text-orange-600"
+                                title: "text-orange-600"
                             }
 
                         }).then((result) => {
                             if (result.isConfirmed) {
-                            
+
                                 createUser(email, password)
-                                    .then(result => {                                      
+                                    .then(result => {
                                         if (result.user) {
-                                            const updateData= {
-                                                authen:"yes"
+                                            const updateData = {
+                                                authen: "yes"
                                             }
                                             axiosGeneral.patch(`/users/${id}`, updateData)
-                                            .then(res=>{
-                                                console.log(res)
-                                                Swal.fire({
-                                                    icon: "success",
-                                                    title: "Login Successfull",
-                                                    showConfirmButton: false,
-                                                    width: "280px",
-                                                    timer: 2000,
-                                                    customClass: {
-                                                        title: 'text-[20px] text-green-600',
-                                                        icon: 'text-[12px]',
-                                                        popup: 'text-green-600 text-sm pt-0',
-                                                    }
-                                                });
+                                                .then(res => {
+                                                    console.log(res)
+                                                    Swal.fire({
+                                                        icon: "success",
+                                                        title: "Login Successfull",
+                                                        showConfirmButton: false,
+                                                        width: "280px",
+                                                        timer: 2000,
+                                                        customClass: {
+                                                            title: 'text-[20px] text-green-600',
+                                                            icon: 'text-[12px]',
+                                                            popup: 'text-green-600 text-sm pt-0',
+                                                        }
+                                                    });
 
-                                            })
-                                           
+                                                })
+
                                             navigate("/dashboard/home")
                                         }
                                     })
@@ -119,24 +119,24 @@ const Login = () => {
                         });
 
                     }
-                   
+
                     else {
                         loginWithIdPass(email, password)
                             .then(result => {
                                 const loggedUser = result.user;
                                 if (loggedUser) {
-                                    Swal.fire({
-                                        icon: "success",
-                                        title: "Login Successfull",
-                                        showConfirmButton: false,
-                                        width: "280px",
-                                        timer: 2000,
-                                        customClass: {
-                                            title: 'text-[20px] text-green-600',
-                                            icon: 'text-[12px]',
-                                            popup: 'text-green-600 text-sm pt-0',
-                                        }
-                                    });
+                                    // Swal.fire({
+                                    //     icon: "success",
+                                    //     text: "Login Successfull",
+                                    //     showConfirmButton: false,
+                                    //     width: "280px",
+                                    //     timer: 3000,
+                                    //     customClass: {
+                                    //         title: 'text-[20px] text-green-600',
+                                    //         icon: 'text-[12px]',
+                                    //         popup: 'text-green-600 text-sm pt-0',
+                                    //     }
+                                    // });
                                     navigate("/dashboard/home")
                                 }
                             })
@@ -165,10 +165,10 @@ const Login = () => {
     //     return <p className="loading loading-spinner text-error text-center mx-auto flex mt-20"></p>
     //  }
     return (
-        
-       
+
+
         <div className="mx-auto flex justify-center items-center h-[100vh] text-gray-700  ">
-            
+
             <form onSubmit={handleSubmit(onSubmit)} className="bg-[#0707070c]">
                 <div className="flex flex-col gap-3 w-[calc(100vw-60px)] md:w-[350px] mx-auto shadow-lg shadow-stone-200 p-6 rounded-md bg-[url(https://i.ibb.co/sJ74JtY/milk-icon2.png)] bg-no-repeat bg-center bg-blend-lighten  ">
 
@@ -215,7 +215,7 @@ const Login = () => {
                         )}
 
                         {
-                            errors? "":<p className="text-red-600 text-sm">{errorPass}</p>
+                            errors ? "" : <p className="text-red-600 text-sm">{errorPass}</p>
                         }
                         {/* {
                             errorPass ?

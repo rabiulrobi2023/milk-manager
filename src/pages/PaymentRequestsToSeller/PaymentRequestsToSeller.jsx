@@ -10,8 +10,6 @@ const PaymentRequestsToSeller = () => {
             <PaymentRequests requests={paymentRequestToSeller} isLoading={isLoading} refetch={refetch} title={"Payment Request"}></PaymentRequests>
         }
         </>
-        
-       
     );
 };
 
